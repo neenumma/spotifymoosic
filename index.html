@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Hanan ❤️</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif}
+body{background:#121212;color:#fff;display:flex;justify-content:center;align-items:center;min-height:100vh;padding:14px}
+.player{width:100%;max-width:390px;background:linear-gradient(to bottom,#2a2a2a 0%, #181818 45%, #121212 100%);border-radius:24px;padding:22px 20px 28px;box-shadow:0 12px 30px rgba(0,0,0,.55)}
+.top{text-align:center;font-size:13px;letter-spacing:2px;opacity:.9;margin-bottom:8px}
+.sub{text-align:center;font-size:12px;color:#b3b3b3;margin-bottom:14px}
+.cover{width:100%;aspect-ratio:1/1;border-radius:14px;object-fit:cover;display:block}
+.song-row{display:flex;justify-content:space-between;align-items:center;margin-top:18px}
+.song-info h1{font-size:30px}
+.song-info h2{font-size:16px;font-weight:500;color:#b3b3b3;margin-top:6px}
+.like{font-size:26px}
+.spotify-progress{-webkit-appearance:none;width:100%;height:4px;background:#535353;border-radius:999px;outline:none;margin-top:18px}
+.spotify-progress::-webkit-slider-thumb{-webkit-appearance:none;width:0;height:0;background:transparent;border:none}
+.time{display:flex;justify-content:space-between;margin-top:8px;font-size:14px;color:#b3b3b3}
+.message{text-align:center;margin-top:18px;line-height:1.7}
+.big{font-size:20px;color:#ff8db3;font-weight:bold}
+.controls{display:flex;justify-content:space-between;align-items:center;margin-top:30px;font-size:24px}
+.play{width:64px;height:64px;border-radius:50%;background:#fff;color:#000;display:flex;justify-content:center;align-items:center;font-size:28px;font-weight:700}
+.footer{margin-top:24px;color:#b3b3b3;font-size:14px}
+</style>
+</head>
+<body>
+<div class="player">
+<div class="top">PLAYING FROM YOUR HEART</div>
+<div class="sub">Made only for Hanan</div>
+<img src="photo.jpg" class="cover" alt="Hanan">
+
+<div class="song-row">
+<div class="song-info">
+<h1>Neen the world</h1>
+<h2>Swabeeh</h2>
+</div>
+<div class="like">♡</div>
+</div>
+
+<audio id="song" autoplay>
+<source src="song.mp3" type="audio/mpeg">
+</audio>
+
+<input type="range" id="progressBar" value="0" min="0" max="100" class="spotify-progress">
+<div class="time">
+<span id="currentTime">0:00</span>
+<span id="duration">3:21</span>
+</div>
+
+<div class="message">
+<div>Dedicated to <b>Hanan 💕</b></div>
+<div class="big">You mean the world to me ❤️</div>
+</div>
+
+<div class="controls">
+<span>🔀</span><span>⏮</span><div class="play">▶</div><span>⏭</span><span>🔁</span>
+</div>
+
+<div class="footer">Artist • Swabeeh<br>Dedicated to Hanan 💚</div>
+</div>
+
+<script>
+const song=document.getElementById('song');
+const progressBar=document.getElementById('progressBar');
+const currentTime=document.getElementById('currentTime');
+const duration=document.getElementById('duration');
+
+function formatTime(time){
+ const mins=Math.floor(time/60);
+ const secs=Math.floor(time%60);
+ return `${mins}:${secs<10?'0':''}${secs}`;
+}
+song.addEventListener('loadedmetadata',()=>{
+ duration.textContent=formatTime(song.duration);
+ progressBar.max=Math.floor(song.duration);
+});
+song.addEventListener('timeupdate',()=>{
+ progressBar.value=Math.floor(song.currentTime);
+ currentTime.textContent=formatTime(song.currentTime);
+});
+progressBar.addEventListener('input',()=>{
+ song.currentTime=progressBar.value;
+});
+</script>
+</body>
+</html>
